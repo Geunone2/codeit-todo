@@ -96,6 +96,7 @@ export interface InputProps {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 export interface MemoProps {
@@ -121,4 +122,14 @@ export interface ButtonProps {
     disabled?: boolean;
     hasTodos?: boolean;
     isCompleted?: boolean;
+}
+
+export interface TodoListProps {
+    title: "TODO" | "DONE";
+    items: getItemResponse[];
+}
+
+export interface TodoFormProps {
+    onAdd: (name: string) => Promise<boolean>;
+    hasTodos: boolean;
 }
