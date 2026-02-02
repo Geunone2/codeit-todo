@@ -2,12 +2,12 @@ import type {Config} from "tailwindcss";
 
 const config: Config = {
     content: [
-        "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+        "./app/**/*.{js,ts,jsx,tsx,mdx}",
+        "./components/**/*.{js,ts,jsx,tsx,mdx}",
+        "./lib/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-        extends: {
+        extend: {
             colors: {
                 slate: {
                     900: '#0F172A',
@@ -36,9 +36,10 @@ const config: Config = {
             },
 
             screens: {
-                'mobile': '375px',
-                'tablet': '844px',
-                'desktop': '1920px',
+                // Mobile-first breakpoints (커스텀)
+                'sm': '375px',    // Mobile
+                'md': '844px',    // Tablet
+                'lg': '1920px',   // Desktop
             },
         },
     },
