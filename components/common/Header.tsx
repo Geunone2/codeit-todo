@@ -1,18 +1,27 @@
 "use client"
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 
+/**
+ * 전역 헤더 컴포넌트
+ * - 반응형 로고 (모바일: Small, 태블릿+: Large)
+ * - 로고 클릭 시 메인 페이지로 이동
+ */
 export default function Header() {
+    const router = useRouter();
+
+    // 로고 클릭 시 메인 페이지로 이동
     const handleLogoClick = () => {
-        window.location.reload();
+        router.push("/");
     };
 
     return (
-        <header className="w-full h-[60px] relative bg-white border-b border-slate-200">
+        <header className="w-full h-15 relative bg-white border-b border-slate-200">
             <button
                 onClick={handleLogoClick}
-                className="absolute top-2.5 left-6 lg:left-[360px]"
+                className="absolute top-2.5 left-6 lg:left-90"
             >
-                {/* Mobile: Small logo */}
+                {/* Mobile (< 844px): Small logo */}
                 <Image
                     src="/assets/Size=Small.svg"
                     alt="do it logo"
@@ -20,7 +29,7 @@ export default function Header() {
                     height={40}
                     className="md:hidden"
                 />
-                {/* Tablet & Desktop: Large logo */}
+                {/* Tablet & Desktop (≥ 844px): Large logo */}
                 <Image
                     src="/assets/Size=Large.svg"
                     alt="do it logo"

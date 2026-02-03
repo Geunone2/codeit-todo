@@ -4,14 +4,6 @@
 // API 파라미터 타입
 // ============================================
 
-export interface TenantIdParam {
-    tenantId: string;
-}
-
-export interface ItemIdParam {
-    itemId: number;
-}
-
 export interface PaginationParam {
     page?: number;
     pageSize?: number;
@@ -75,9 +67,6 @@ export interface deleteItemResponse {
 }
 
 // 이미지 업로드
-export interface imageRequest {
-    image: string;
-}
 
 export interface imageResponse {
     url: string;
@@ -127,9 +116,14 @@ export interface ButtonProps {
 export interface TodoListProps {
     title: "TODO" | "DONE";
     items: getItemResponse[];
+    onToggle: (itemId: number, isCompleted: boolean) => Promise<void>;
 }
 
 export interface TodoFormProps {
     onAdd: (name: string) => Promise<boolean>;
     hasTodos: boolean;
+}
+
+export interface TodoDetailProps {
+    itemId: number;
 }

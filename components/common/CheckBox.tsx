@@ -2,13 +2,20 @@
 import Image from "next/image";
 import {CheckboxProps} from "@/lib/type";
 
+/**
+ * 재사용 가능한 체크박스 컴포넌트
+ * - list variant: 왼쪽 정렬, 완료 시 취소선
+ * - detail variant: 중앙 정렬, 항상 밑줄
+ * - 아이콘만 클릭 가능 (이벤트 버블링 차단)
+ */
 export default function Checkbox({
                                      isCompleted,
                                      text,
                                      onToggle,
                                      variant = "list"
                                  }: CheckboxProps) {
-    // 스타일 계산
+
+    // varient 및 완료 상태에 따른 스타일 계산
     const bgColor = isCompleted ? 'bg-violet-100' : 'bg-white';
     const iconSrc = isCompleted
         ? '/assets/ic/Property 1=Frame 2610233.svg'
@@ -22,26 +29,35 @@ export default function Checkbox({
         ? (isCompleted ? 'line-through' : '')
         : 'underline';
 
+    // 이벤트 버블링 방지 (상세 페이지 이동 차단)
+    const handleIconClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        onToggle();
+    };
+
     return (
-        <button
-            onClick={onToggle}
-            className={`w-full h-[50px] relative rounded-[27px] border-2 border-slate-900 ${bgColor}`}
+        <div
+            className={`w-full h-12.5 relative rounded-[27px] border-2 border-slate-900 ${bgColor}`}
         >
             <div className={`flex items-center gap-4 ${containerClass}`}>
-                {/* Checkbox Icon */}
-                <Image
-                    src={iconSrc}
-                    alt="checkbox"
-                    width={32}
-                    height={32}
-                    className="w-8 h-8 flex-shrink-0"
-                />
+                {/* 체크박스 아이콘 */}
+                <button
+                    onClick={handleIconClick}
+                    className="shrink-0">
+                    <Image
+                        src={iconSrc}
+                        alt="checkbox"
+                        width={32}
+                        height={32}
+                        className="w-8 h-8"
+                    />
+                </button>
 
-                {/* Text */}
+                {/* 할 일 텍스트 */}
                 <p className={`text-base text-slate-800 ${textStyle}`}>
                     {text}
                 </p>
             </div>
-        </button>
+        </div>
     );
 }
