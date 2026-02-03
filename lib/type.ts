@@ -101,6 +101,8 @@ export interface CheckboxProps {
     text: string;
     onToggle: () => void;
     variant?: CheckboxVariant;
+    editable?: boolean;
+    onTextChange?: (text: string) => void;
 }
 
 export type ButtonVariant = "add" | "delete" | "complete";
