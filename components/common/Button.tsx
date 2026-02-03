@@ -14,7 +14,7 @@ function getConfig(variant: ButtonVariant, hasTodos: boolean, isCompleted: boole
             bgColor: hasTodos ? 'bg-slate-200' : 'bg-violet-600',
             textColor: hasTodos ? 'text-slate-900' : 'text-white',
             iconClass: hasTodos ? 'brightness-0' : '',
-            icon: '/assets/ic/Property 1=plus.svg',
+            icon: '/assets/ic/Property1Plus.svg',
             text: '추가하기',
             isResponsive: true,
         },

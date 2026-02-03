@@ -23,7 +23,7 @@ export default function Header() {
             >
                 {/* Mobile (< 844px): Small logo */}
                 <Image
-                    src="/assets/Size=Small.svg"
+                    src="/assets/SizeSmall.svg"
                     alt="do it logo"
                     width={71}
                     height={40}
@@ -31,7 +31,7 @@ export default function Header() {
                 />
                 {/* Tablet & Desktop (≥ 844px): Large logo */}
                 <Image
-                    src="/assets/Size=Large.svg"
+                    src="/assets/SizeLarge.svg"
                     alt="do it logo"
                     width={151}
                     height={40}

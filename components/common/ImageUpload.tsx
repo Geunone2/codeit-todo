@@ -2,6 +2,7 @@
 import Image from "next/image";
 import {useRef, useState} from "react";
 import {ImageUpLoadProps} from "@/lib/type";
+import TypeEditIcon from "@/public/assets/ic/TypeEdit.svg";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -42,7 +43,7 @@ export default function ImageUpload({imageUrl, onImageChange}: ImageUpLoadProps)
         fileInputRef.current?.click();
     };
 
-    const buttonIcon = imageUrl ? "/assets/ic/Type=edit.svg" : "/assets/ic/Type=Plus.svg";
+    const buttonIcon = imageUrl ? "/assets/ic/TypeEdit.svg" : "/assets/ic/TypePlus.svg";
     const buttonAlt = imageUrl ? "edit" : "add";
 
     return (
