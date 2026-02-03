@@ -20,8 +20,8 @@ export default function Checkbox({
     // varient 및 완료 상태에 따른 스타일 계산
     const bgColor = isCompleted ? 'bg-violet-100' : 'bg-white';
     const iconSrc = isCompleted
-        ? '/assets/ic/Property 1=Frame 2610233.svg'
-        : '/assets/ic/Property 1=Default.svg';
+        ? '/assets/ic/Property1Frame2610233.svg'
+        : '/assets/ic/Property1Default.svg';
 
     const containerClass = variant === "list"
         ? 'absolute left-3 inset-y-0'

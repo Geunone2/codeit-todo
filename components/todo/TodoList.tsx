@@ -7,14 +7,14 @@ import {TodoListProps} from "@/lib/type";
 // TODO/DONE 영역별 설정
 const LIST_CONFIG = {
     TODO: {
-        emptyImage: "/assets/img/Type=Todo, Size=Large.svg",
+        emptyImage: "/assets/img/TypeTodoSizeLarge.svg",
         emptyText: "할 일이 없어요.",
         emptySubText: "TODO를 새롭게 추가해주세요!",
         tagBg: "bg-lime-300",
         tagText: "text-green-700",
     },
     DONE: {
-        emptyImage: "/assets/img/Type=Done, Size=Large.svg",
+        emptyImage: "/assets/img/TypeDoneSizeLarge.svg",
         emptyText: "아직 다 한 일이 없어요.",
         emptySubText: "해야 할 일을 체크해보세요!",
         tagBg: "bg-green-700",
