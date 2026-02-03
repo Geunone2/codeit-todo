@@ -2,7 +2,12 @@
 import Image from "next/image";
 import {ButtonProps, ButtonVariant} from "@/lib/type";
 
-// 버튼 설정
+/**
+ * variant별 버튼 설정 반환
+ * @param variant - 버튼 종류 (add, delete, complete)
+ * @param hasTodos - 할 일 존재 여부 (add 버튼 색상 결정)
+ * @param isCompleted - 완료 여부 (complete 버튼 색상 결정)
+ */
 function getConfig(variant: ButtonVariant, hasTodos: boolean, isCompleted: boolean) {
     const configs = {
         add: {
@@ -58,10 +63,10 @@ export default function Button({
             disabled={disabled}
             className={`${buttonSize} relative group`}
         >
-            {/* Shadow */}
+            {/* 그림자 영역 */}
             <div className={`absolute rounded-3xl bg-slate-900 border-2 border-slate-900 ${shadowSize}`}/>
 
-            {/* Button Background */}
+            {/* 배경 영역 */}
             <div className={`
                 absolute rounded-3xl border-2 border-slate-900 
                 ${bgColor} ${layerSize}
@@ -69,7 +74,7 @@ export default function Button({
                 ${disabled ? 'opacity-50' : 'group-hover:left-[0.5px] group-hover:top-[0.5px]'}
             `}/>
 
-            {/* Content */}
+            {/* 내용 영역 */}
             <div className={`
                 flex justify-center items-center absolute gap-1
                 ${layerSize}

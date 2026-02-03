@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 import {TodoListProps} from "@/lib/type";
 
+// TODO/DONE 영역별 설정
 const LIST_CONFIG = {
     TODO: {
         emptyImage: "/assets/img/Type=Todo, Size=Large.svg",
@@ -20,12 +22,28 @@ const LIST_CONFIG = {
     },
 } as const;
 
-export default function TodoList({title, items}: TodoListProps) {
+/**
+ * 할 일 목록 컴포넌트
+ * - TODO/DONE 영역별 스타일 적용
+ * - 체크박스 클릭: 완료 상태 토글
+ * - 아이템 클릭: 상세 페이지 이동
+ */
+export default function TodoList({title, items, onToggle}: TodoListProps) {
+    const router = useRouter();
     const config = LIST_CONFIG[title];
+
+    const handleItemClick = (itemId: number) => {
+        router.push(`/items/${itemId}`);
+    };
+
+    const handleCheckboxClick = async (e: React.MouseEvent, itemId: number, currentStatus: boolean) => {
+        e.stopPropagation();
+        await onToggle(itemId, !currentStatus);
+    };
 
     return (
         <section className="flex flex-col gap-4">
-            {/* 타이틀 태그 - config에서 색상을 가져옴 */}
+            {/* 타이틀 태그 */}
             <div className="w-fit">
                 <div
                     className={`flex justify-center items-center gap-2.5 px-6.75 pt-1 pb-1.75 rounded-[23px] ${config.tagBg}`}>
@@ -41,12 +59,16 @@ export default function TodoList({title, items}: TodoListProps) {
                     {items.map((item) => (
                         <div
                             key={item.id}
-                            className={`flex items-center gap-4 px-3 py-2.25 min-h-12.5 rounded-[27px] border-2 border-slate-900 ${
+                            onClick={() => handleItemClick(item.id)}
+                            className={`flex items-center gap-4 px-3 py-2.25 min-h-12.5 rounded-[27px] border-2 border-slate-900 cursor-pointer hover:opacity-80 transition-opacity ${
                                 item.isCompleted ? "bg-violet-100" : "bg-white"
                             }`}
                         >
-                            {/* 체크박스 로직 (생략 - 기존과 동일) */}
-                            <div className="shrink-0 cursor-pointer">
+                            {/* 체크박스 아이콘 */}
+                            <button
+                                onClick={(e) => handleCheckboxClick(e, item.id, item.isCompleted)}
+                                className="shrink-0"
+                            >
                                 {item.isCompleted ? (
                                     <div
                                         className="w-8 h-8 rounded-full bg-violet-600 flex items-center justify-center border-2 border-slate-900">
@@ -58,7 +80,7 @@ export default function TodoList({title, items}: TodoListProps) {
                                 ) : (
                                     <div className="w-8 h-8 rounded-full bg-yellow-50 border-2 border-slate-900"/>
                                 )}
-                            </div>
+                            </button>
 
                             <span
                                 className={`text-base font-medium truncate ${item.isCompleted ? "line-through text-slate-800" : "text-slate-800"}`}>
@@ -68,7 +90,7 @@ export default function TodoList({title, items}: TodoListProps) {
                     ))}
                 </div>
             ) : (
-                /* Empty State - config의 값을 사용 */
+                /* Empty State */
                 <div className="flex flex-col items-center justify-center py-20 px-4 min-h-75">
                     <Image
                         src={config.emptyImage}

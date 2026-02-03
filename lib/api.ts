@@ -81,7 +81,7 @@ export async function postItem(
  */
 export async function patchItemDetail(
     itemId: number,
-    data: patchItemDetailRequest
+    data: Partial<patchItemDetailRequest>
 ): Promise<patchItemDetailResponse> {
     return fetchAPI<patchItemDetailResponse>(`/items/${itemId}`, {
         method: 'PATCH',

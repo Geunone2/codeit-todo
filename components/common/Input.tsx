@@ -1,6 +1,13 @@
 "use client"
 import {InputProps} from "@/lib/type";
 
+/**
+ * 할 일 입력 컴포넌트
+ * - Shadow 효과 (Button과 동일한 디자인)
+ * - 긴 텍스트 자동 스크롤
+ * - Enter 키 지원 (onKeyDown prop)
+ * - focus 시 테두리 표시
+ */
 export default function Input({
                                   value,
                                   onChange,
@@ -9,15 +16,15 @@ export default function Input({
                               }: InputProps) {
     return (
         <div className="w-full h-14 relative">
-            {/* Shadow */}
+            {/* 그림자 영역 */}
             <div
                 className="w-full h-[52.5px] absolute left-0.75 top-[2.5px] rounded-3xl bg-slate-900 border-2 border-slate-900"/>
 
-            {/* Background */}
+            {/* 배경 영역 */}
             <div
                 className="w-full h-[52.5px] absolute -left-px -top-px rounded-3xl bg-slate-100 border-2 border-slate-900"/>
 
-            {/* Input */}
+            {/* Input 영역 */}
             <input
                 type="text"
                 value={value}
