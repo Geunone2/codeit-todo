@@ -5,8 +5,8 @@ import {useEffect} from "react";
 import Button from "@/components/common/Button";
 import ImageUpload from "@/components/common/ImageUpload";
 import Memo from "@/components/common/Memo";
-import Checkbox from "@/components/common/CheckBox";
 import {TodoDetailProps} from "@/lib/type";
+import Checkbox from "@/components/common/CheckBox";
 
 /**
  * 할 일 상세 페이지 컴포넌트
@@ -21,6 +21,7 @@ export default function TodoDetail({itemId}: TodoDetailProps) {
         isLoading,
         fetchTodoDetail,
         updateMemo,
+        updateName,
         toggleComplete,
         uploadTodoImage,
         saveTodo,
@@ -41,7 +42,7 @@ export default function TodoDetail({itemId}: TodoDetailProps) {
         const success = await saveTodo();
         if (success) {
             alert("할 일 내용이 수정되었습니다.");
-            router.refresh();
+            router.push("/");
         }
     };
 
@@ -61,17 +62,20 @@ export default function TodoDetail({itemId}: TodoDetailProps) {
 
     return (
         <div className="container mx-auto px-6 py-8 max-w-300">
-            {/* 제목 영역 */}
+
+            {/* 제목 */}
             <div className="mb-8">
                 <Checkbox
                     variant="detail"
                     isCompleted={todo.isCompleted}
                     text={todo.name}
                     onToggle={toggleComplete}
+                    editable={true}
+                    onTextChange={updateName}
                 />
             </div>
 
-            {/* 이미지 + 메모 영역 */}
+            {/* 이미지 + 메모 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <ImageUpload
                     imageUrl={todo.imageUrl}
@@ -84,7 +88,7 @@ export default function TodoDetail({itemId}: TodoDetailProps) {
                 />
             </div>
 
-            {/* 버튼 영역 */}
+            {/* 버튼 */}
             <div className="flex justify-center lg:justify-end gap-4">
                 <Button
                     variant="complete"

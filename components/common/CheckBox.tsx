@@ -12,7 +12,9 @@ export default function Checkbox({
                                      isCompleted,
                                      text,
                                      onToggle,
-                                     variant = "list"
+                                     variant = "list",
+                                     editable = false,
+                                     onTextChange
                                  }: CheckboxProps) {
 
     // varient 및 완료 상태에 따른 스타일 계산
@@ -39,7 +41,7 @@ export default function Checkbox({
         <div
             className={`w-full h-12.5 relative rounded-[27px] border-2 border-slate-900 ${bgColor}`}
         >
-            <div className={`flex items-center gap-4 ${containerClass}`}>
+            <div className={`flex items-center gap-4 ${containerClass} ml-2`}>
                 {/* 체크박스 아이콘 */}
                 <button
                     onClick={handleIconClick}
@@ -53,10 +55,20 @@ export default function Checkbox({
                     />
                 </button>
 
-                {/* 할 일 텍스트 */}
-                <p className={`text-base text-slate-800 ${textStyle}`}>
-                    {text}
-                </p>
+                {/* 할 일 텍스트 (편집 가능/불가능) */}
+                {editable && onTextChange ? (
+                    <input
+                        type="text"
+                        value={text}
+                        onChange={(e) => onTextChange(e.target.value)}
+                        className={`flex-1 bg-transparent text-base text-slate-800 ${textStyle} outline-none`}
+                        placeholder="할 일 제목"
+                    />
+                ) : (
+                    <p className={`text-base text-slate-800 ${textStyle}`}>
+                        {text}
+                    </p>
+                )}
             </div>
         </div>
     );

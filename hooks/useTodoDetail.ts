@@ -40,6 +40,11 @@ export default function useTodoDetails(itemId: number) {
         }
     }, []);
 
+    // 제목 업데이트
+    const updateName = useCallback((name: string) => {
+        setTodo((prev) => prev ? {...prev, name} : null);
+    }, []);
+
     // 메모 업데이트
     const updateMemo = useCallback((memo: string) => {
         setTodo((prev) => prev ? {...prev, memo} : null);
@@ -57,8 +62,8 @@ export default function useTodoDetails(itemId: number) {
         try {
             await patchItemDetail(itemId, {
                 name: todo.name,
-                memo: todo.memo,
-                imageUrl: todo.imageUrl,
+                memo: todo.memo || undefined,
+                imageUrl: todo.imageUrl || undefined,
                 isCompleted: todo.isCompleted
             });
             return true;
@@ -86,6 +91,7 @@ export default function useTodoDetails(itemId: number) {
         isLoading,
         fetchTodoDetail,
         uploadTodoImage,
+        updateName,
         updateMemo,
         toggleComplete,
         saveTodo,
